@@ -1,0 +1,1245 @@
+<!-- Created by Sunday Power Inemesit -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> My To-do App </title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <style>
+            /* Created by Sunday Power Inemesit */
+
+            
+           
+            html,
+            body
+            {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                font-size: 0.97rem;
+                font-family: "Trebuchet MS", "Comic Sans MS", "Georgia";
+            }
+            
+            body
+            {
+                margin: 0 auto;
+                max-width: ;300px;
+            }
+            
+            *
+            { box-sizing: border-box; }
+            
+            #content-wrapper
+            {
+                width: 100%;
+                height: 100%;
+                position: fixed;
+                top: 0;
+                overflow-y: auto;
+                background: #808080;
+            }
+            
+            h2
+            {
+                padding: 20px;
+                text-align: center;
+                background: #303030;
+                color: gainsboro;
+                margin: 0;
+                box-shadow: 0 7px 0 #000;
+            }
+            
+            button
+            { 
+                border: none;
+                border-radius: 3px;
+                padding: 6px 14px;
+                color: white;
+            }
+            
+            input
+            {
+                background: none;
+                border: none;
+                outline: none;
+                border-bottom: 1px solid grey;
+                text-align: center;
+                font-family: "Trebuchet MS";
+                width: 100%;
+                padding: 4px 5px;
+                margin: 0 auto;
+                -webkit-transition: 0.3s;
+                -moz-transition: 0.3s;
+                -ms-transition: 0.3s;
+                -o-transition: 0.3s;
+                transition: 0.3s;
+            }
+                
+            button
+            {
+                outline: none;
+                font-family: "Trebuchet MS";
+                -webkit-transition: 0.25s ease-out;
+                -moz-transition: 0.25s ease-out;
+                -ms-transition: 0.25s ease-out;
+                -o-transition: 0.25s ease-out;
+                transition: 0.25s ease-out;
+            }
+            
+            input:hover
+            { 
+                border-bottom: 2px solid royalblue; 
+                color: royalblue; 
+            }
+            
+            span
+            { display: inline-block; }
+            
+
+            hr
+            {
+                border: none;
+                margin: 20px auto 18px auto;
+                width: 80%;
+                height: 2px;
+                background: -webkit-radial-gradient(#aaa, #aaa, #808080, #808080);
+                background: -moz-radial-gradient(#aaa, #aaa, #808080, #808080);
+                background: -ms-radial-gradient(#aaa, #aaa, #808080, #808080);
+                background: -o-radial-gradient(#aaa, #aaa, #808080, #808080);
+                background: radial-gradient(#aaa, #aaa, #808080, #808080);
+            }
+            
+            .sub-content-wrapper
+            { padding: 8px 12px 20px 12px; }
+            
+            #create-delete-container-parent
+            {
+                height: 46px;
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            #create-delete-container
+            { 
+                height: 46px;
+                top: -130%;
+                width: 100%;
+                left: 0;
+                z-index: 2;
+            }
+            
+            #create-delete-container button
+            {
+                width: 50%;
+                float: left;
+                border-radius: 0;
+                font-size: 95%;
+                padding: 11px 15px;
+                font-weight: bold;
+                margin: 0;
+            }
+            
+            #create-task
+            {
+                background: #337933;
+                box-shadow: 0 7px 0 #004400;
+                -webkit-transition: 0.1s;
+                -moz-transition: 0.1s;
+                -ms-transition: 0.1s;
+                -o-transition: 0.1s;
+                transition: 0.1s;
+            }
+            
+            #delete-all
+            { 
+                background: #ba4343;
+                box-shadow: 0 7px 0 #770000;
+                -webkit-transition: 0.1s;
+                -moz-transition: 0.1s;
+                -ms-transition: 0.1s;
+                -o-transition: 0.1s;
+                transition: 0.1s;
+            }
+            
+            .task-wrapper
+            {
+                padding: 10px;
+                width: 100%;
+                height: auto;
+                background: #dadada;
+                margin: 20px 0 35px 0;
+                list-style-type: none;
+                border: 4px solid #999;
+                border-radius: 18px 18px 0px 0px;
+                border-top: 8px ridge deeppink;
+                box-shadow: 0 8px 10px 0 #000;
+                opacity: 1;
+            }
+            
+            .task-wrapper li
+            {
+                display: table;
+                width: 100%;
+            }
+            
+            .description-container,
+            .edit-container
+            { 
+                display: table-cell;
+                vertical-align: middle;
+                border-bottom: 1px solid #bbb;
+            }
+            
+            .description-container 
+            {
+                width: 80%;
+                position: relative;
+            }
+            
+            .description
+            { 
+                font-weight: bold;
+                display: table-cell;
+                padding: 8px 3px 8px 0;
+                white-space: nowrap;
+                vertical-align: middle;
+            }
+            
+            .task-wrapper li:first-of-type .js--content
+            { font-size: 105%; }
+            
+            .task-wrapper li:first-of-type .description
+            {
+                font-size: 105%;
+                color: deeppink;
+                text-shadow: 1px 0px 0 white, -1px 0px 0 white, 0 1px 0 white, 0 -1px 0 white;
+            }
+            
+            .desc-content
+            {
+                display: table-cell;
+                padding: 6px 6px;
+                vertical-align: middle;
+                width: 100%;
+                word-wrap: break-word;
+                word-break: break-all;
+                -webkit-transition: 0.25s;
+                -moz-transition: 0.25s;
+                -ms-transition: 0.25s;
+                -o-transition: 0.25s;
+                transition: 0.25s;
+            }
+            
+            .edit-container 
+            { 
+                width: 20%;
+                text-align: right;
+                padding: 5px 0;
+                vertical-align: middle;
+            }
+            
+            .edit
+            {
+                background: #222;
+                font-size: 80%;
+                opacity: 0.9;
+            }
+            
+            .bar-container
+            {
+                width: 100%;
+                border: 2px solid white;
+                border-radius: 20px;
+                overflow: hidden;
+                margin: 0;
+                margin-bottom: 5px;
+                height: 28px;
+                text-align: center;
+                font-size: 90%;
+            }
+            
+            .description-wrapper:nth-child(3) .edit-container,
+            .description-wrapper:nth-child(3) .description-container
+            { border-bottom: none; }
+            
+            .progress-bar
+            { 
+                background: #ff4444;
+                height: 100%;
+                width: 0%;
+                padding: 4px 0 5px 0;
+                text-align: center;
+                color: #9a1515;
+                -webkit-transition: width 1.5s, color 1.2s, background 1.2s;
+                -moz-transition: width 1.5s, color 1.2s, background 1.2s;
+                -ms-transition: width 1.5s, color 1.2s, background 1.2s;
+                -o-transition: width 1.5s, color 1.2s, background 1.2s;
+                transition: width 1.5s, color 1.2s, background 1.2s;
+            }
+            
+            .percent-complete
+            { 
+                -webkit-transition: color 0.5s;
+                -moz-transition: color 0.5s;
+                -ms-transition: color 0.5s;
+                -o-transition: color 0.5s;
+                transition: color 0.5s; 
+            }
+            
+            .date
+            {
+                font-size: 85%;
+                color: grey;
+                font-weight: normal;
+            }
+            
+            .description-wrapper:last-child .edit-container
+            {
+                border: none;
+                padding: 0;
+            }
+            
+            .input 
+            {
+                text-align: center; 
+                width: 100%;
+                display: none;
+                opacity: 0;
+                -webkit-transition: opacity 0.3s;
+                -moz-transition: opacity 0.3s;
+                -ms-transition: opacity 0.3s;
+                -o-transition: opacity 0.3s;
+                transition: opacity 0.3s;
+            }
+            
+            .save
+            { 
+                background: #4169e1;
+                font-size: 85%;
+                margin-top: 8px;
+                margin-right: 10px;
+            }
+            
+            .save:hover
+            { background: #880000; }
+            
+            .delete
+            { 
+                background: #aa3333;
+                font-size: 85%;
+                margin-top: 8px;
+            }
+            
+            .delete:hover
+            { background: #880000; }
+            
+            #my-name         
+            { 
+                padding: 85px;
+                color: #bcbcbc;#b0b0b0;
+                text-align: center;
+                line-height: 160%;
+                width: 100%;
+                font-size: 80%;
+                height: 280px;
+            }
+            
+            #toast-wrapper
+            {
+                height: auto;
+                width: 70%;
+                margin: 0 15% 45px 15%;
+                padding: 0;
+                text-align: center;
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                display: none;
+                opacity: 0;
+                -webkit-transition: opacity 0.6s ease-in-out;
+                -moz-transition: opacity 0.6s ease-in-out;
+                -ms-transition: opacity 0.6s ease-in-out;
+                -o-transition: opacity 0.6s ease-in-out;
+                transition: opacity 0.6s ease-in-out;
+            }
+            
+            #toast
+            {
+                font-size: 82%;
+                padding: 10px 15px;
+                background: black;
+                display: inline-block;
+                color: white;
+                border-radius: 5px;
+                box-shadow: 0 2px 4px 0 #333;
+            }
+            
+            .fadeUp
+            {
+                opacity: 0;
+                -webkit-animation: fadeUp 0.6s forwards ease;
+                -moz-animation: fadeUp 0.6s forwards ease;
+                -ms-animation: fadeUp 0.6s forwards ease;
+                -o-animation: fadeUp 0.6s forwards ease;
+                animation: fadeUp 0.6s forwards ease;
+            }
+            
+            @-webkit-keyframes fadeUp
+            {
+                from { margin-top: 240px; opacity: 0; }
+                to { margin-top: 20px; opacity: 1 }
+            }
+            @-moz-keyframes fadeUp
+            {
+                from { margin-top: 240px; opacity: 0; }
+                to { margin-top: 20px; opacity: 1 }
+            }
+            @-o-keyframes fadeUp
+            {
+                from { margin-top: 240px; opacity: 0; }
+                to { margin-top: 20px; opacity: 1 }
+            }
+            keyframes fadeUp
+            {
+                from { margin-top: 240px; opacity: 0; }
+                to { margin-top: 20px; opacity: 1 }
+            }
+            
+            .slideDown
+            {
+                opacity: 0;
+                -webkit-animation: slideDown 1.5s forwards;
+                -moz-animation: slideDown 1.5s forwards;
+                -ms-animation: slideDown 1.5s forwards;
+                -o-animation: slideDown 1.5s forwards;
+                animation: slideDown 1.5s forwards;
+            }
+            
+            @-webkit-keyframes slideDown 
+            {
+                from { top: -100%; opacity: 0; }
+                to { top: 0; opacity: 1; }
+            }
+            @-moz-keyframes slideDown 
+            {
+                from { top: -100%; opacity: 0; }
+                to { top: 0; opacity: 1; }
+            }
+            @-o-keyframes slideDown 
+            {
+                from { top: -100%; opacity: 0; }
+                to { top: 0; opacity: 1; }
+            }
+            keyframes slideDown 
+            {
+                from { top: -100%; opacity: 0; }
+                to { top: 0; opacity: 1; }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </style>
+    </head>
+    <body>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <div id="content-wrapper">
+            <h2> ~•• My To-do App ••~ </h2>
+            <div class="col-sm-6 col-12 sub-content-wrapper">
+                <!-- Create/Delete tasks - START -->
+                <hr />
+                <div id="create-delete-container-parent">
+                    <div id="create-delete-container">
+                        <button id="create-task">+ Add Task</button>
+                        <button id="delete-all">&times; Delete All Tasks</button>
+                    </div>
+                </div>
+                <hr />
+                <!-- Create/Delete tasks - END -->
+                <!-- Task wrapper - START -->
+                <div id="tasks-container"></div>
+                <!-- Task wrapper - END -->
+            </div>
+            <div id="my-name">
+                Designed and developed by <br />
+                <span id="name">Brandon</span>    <br /> 
+                <span> The Spy Club. &frac14; UNN </span> <br />
+                &copy; 2018
+            </div>
+            <div id="toast-wrapper">
+                <span id="toast">File successfully Saved</span>
+            </div>
+        </div>
+        <script>
+            // Created by Sunday Power Inemesit
+
+
+ 
+// Identifiers
+ID = document.getElementById.bind(document);
+CLASS = document.getElementsByClassName.bind(document);
+TAG = document.getElementsByTagName.bind(document);
+
+// The part-HTML
+newTask = '\
+    <ul id="task-wrapper" class="task-wrapper fadeUp js--task-wrapper">\
+        <!-- Task name -->\
+        <li class="description-wrapper">\
+            <span class="description-container">\
+                <span class="description js--description"> Task <span class="js--task-index">1</span>: </span>    <span class="desc-content js--task-name js--content"></span>\
+                <span class="desc-content input"> <input type="text" placeholder="Input task name" /> </span>\
+            </span>\
+            <span class="edit-container">\
+                <button class="edit js--edit-content">Edit</button> \
+            </span>\
+        </li>\
+        <!-- Duration -->\
+        <li class="description-wrapper">\
+            <span class="description-container">\
+                <span class="description"> Duration: </span>     <span class="desc-content js--content"></span>    \
+                <span class="desc-content input"> <input type="number" placeholder="duration in minutes" /> </span>\
+            </span>\
+            <span class="edit-container">\
+                <button class="edit js--edit-content">Edit</button>\
+            </span>\
+        </li>\
+        <!-- Progress -->\
+        <li class="description-wrapper">\
+            <span class="description-container">\
+                <span class="description"> Track Progress: </span>\
+                <span class="desc-content input"> <input type="number" placeholder="in % (percentage)" /> </span>\
+            </span>\
+            <span class="edit-container">\
+                <button class="edit js--edit-content">Edit</button>\
+            </span>\
+        </li>\
+        <!-- Bar -->\
+        <li>\
+            <div class="bar-container">\
+                <div class="progress-bar js--progress-bar"> <span class="js--content js--percent-complete"></span></div>\
+            </div>\
+        </li>\
+        <!-- Date -->\
+        <li class="description-wrapper">\
+            <span class="description date"> Date Added:<br /> <span class="js--task-date"></span></span>\
+        </li>\
+        <!-- Delete -->\
+        <li class="description-wrapper">\
+            <span class="description edit-container"><button class="js--save save">• Save Task</button><button class="js--delete delete">&times; Delete Task</button> </span>\
+        </li>\
+    </ul>';
+
+
+
+this.onload = function() 
+{
+    borderColorIndex = 0;
+    
+    storageEnabled = navigator.cookieEnabled;
+    
+    if (!storageEnabled)
+        toast("App won't function properly without storage.<br/>Enable cookies in browser.")
+    
+    
+    // The date function
+    function date()
+    {
+        months =    ['January', 'February', 'March', 'April', 'May',
+                    'June', 'July', 'August', 'September', 'October',
+                    'November', 'December']
+        days =        ['Sunday', 'Monday', 'Tuesday', 'Wednesday',
+                    'Thursday', 'Friday', 'Saturday']
+    
+        setDay = new Date().getDay();
+        setDate = new Date().getDate();
+        setMonth = new Date().getMonth();
+        setHours = new Date().getHours();
+        setMinutes = new Date().getMinutes();
+        setYear = new Date().getYear();
+        
+        // Sets month of the year
+        for (var i=0, month, monthsLen=months.length; i<monthsLen; i++)
+            if (setMonth == i)
+            {
+                setMonth = months[i];
+                break;
+            }
+            else continue;
+        
+        // Sets day of the week
+        for (var i=0, day, daysLen=days.length; i<daysLen; i++)
+            if (setDay == i)
+            {
+                setDay = days[i];
+                break;
+            }
+            else continue;
+        
+        if (setMinutes < 10)
+            setMinutes = "0" + setMinutes;
+            
+        // Checks if AM or PM then sets hours appropriately
+        if (setHours == 0)
+            setHours = 12,
+            setMinutes = setMinutes + "AM";
+        else if (setHours > 0 && setHours < 12)
+            setHours = setHours,
+            setMinutes = setMinutes + "AM";
+        else if (setHours > 12)
+            setHours = (setHours - 12),
+            setMinutes = setMinutes + "PM";
+        else if (setHours == 12)
+            setHours = setHours,
+            setMinutes = setMinutes + "PM";
+            
+        if (setHours < 10)
+            setHours = "0" + setHours;
+        
+        if (setDate < 10)
+            setDate = "0" + setDate;
+        
+        // Checks for the value of this (the object calling the function) and sets it accordingly
+        if (this == window)
+            CLASS("js--task-date")[CLASS("js--task-wrapper").length-1].innerHTML =
+                        setDay+" "+setDate+" "+setMonth+", 20"+String(setYear).slice(1,3)+" @ "+setHours+":"+setMinutes;
+        else
+            CLASS("js--task-date")[0].innerHTML =
+                        setDay+" "+setDate+" "+setMonth+", 20"+String(setYear).slice(1,3)+" @ "+setHours+":"+setMinutes;
+    }
+    
+    
+    
+    function removeListeners()
+    {
+        //Removing event listeners from all classes
+        for (var i=0; i<CLASS("js--edit-content").length; i++)
+            CLASS("js--edit-content")[i].removeEventListener("click", edit);
+        for (var i=0; i<TAG("input").length; i++)
+            TAG("input")[i].removeEventListener("input", swap);
+        for (var i=0; i<CLASS("js--delete").length; i++)
+            CLASS("js--delete")[i].removeEventListener("click", deleete);
+        for (var i=0; i<CLASS("js--save").length; i++)
+            CLASS("js--save")[i].removeEventListener("click", save);
+    }
+    function addListeners()
+    {
+        //Re-adding events listeners to respective classes
+        for (var i=0; i<CLASS("js--edit-content").length; i++)
+            CLASS("js--edit-content")[i].addEventListener("click", edit);
+        for (var i=0; i<TAG("input").length; i++)
+            TAG("input")[i].addEventListener("input", swap);
+        for (var i=0; i<CLASS("js--delete").length; i++)
+            CLASS("js--delete")[i].addEventListener("click", deleete);
+        for (var i=0; i<CLASS("js--save").length; i++)
+            CLASS("js--save")[i].addEventListener("click", save);
+    }
+    
+    
+    
+    // Create Task function
+    ID("create-task").onclick = function()
+    {
+        var that = this;
+        
+        ID("tasks-container").insertAdjacentHTML("afterbegin", newTask);
+        if (CLASS("js--task-index")[1] == undefined)
+            CLASS("js--task-index")[0].innerHTML = 1;
+        else
+            CLASS("js--task-index")[0].innerHTML = Number(CLASS("js--task-index")[1].innerHTML)+1;
+        
+        removeListeners();
+        addListeners();
+        
+        //Sets task top-border colour and text colour
+        borderColor = ['#67aecb', 'deeppink', 'tomato', 'forestgreen', 'darksalmon', '#7aad12',
+                        'orange', 'purple', 'coral', '#12ad12',
+                        'orangered', '#bd80bd'];
+        
+        if (borderColorIndex < borderColor.length-1)
+            borderColorIndex++;
+        else
+            borderColorIndex = 0;
+        
+        CLASS("js--task-wrapper")[0].style.borderTopColor = borderColor[borderColorIndex];
+        CLASS("description")[0].style.color = borderColor[borderColorIndex];
+        
+        // Sets background of edit buttons to colour of top border
+        for (i=0; i<3; i++)
+            CLASS("js--task-wrapper")[0].getElementsByClassName("edit")[i].style.background = 
+                            borderColor[borderColorIndex];
+        
+        //This is to make sure that animation is smooth on delete of task by removing 'fadeUp' class
+        setTimeout(function()
+        {
+            that.parentNode.parentNode.parentNode.getElementsByClassName("js--task-wrapper")[0].className = 
+                            that.parentNode.parentNode.parentNode.getElementsByClassName("js--task-wrapper")[0].className.replace("fadeUp", "");
+        }, 600);
+        
+        //On mouse over button transition function
+        this.onmouseover = (function() 
+            {
+                that.style.background = "#226022";
+                that.style.marginTop = "3px";
+                that.style.boxShadow = "0 4px 0 #004400";
+            })();
+        this.onmouseout = setTimeout(function()
+            {
+                that.style.background = "#337933";
+                that.style.marginTop = "0";
+                that.style.boxShadow = "0 7px 0 #004400";
+            }, 180);
+        
+        //Calling the date function and setting the 'this' value accordingly
+        date.call(this);
+    }
+    
+    
+    
+    //'Delete all tasks' function
+    ID("delete-all").onclick = function()
+    {
+        var that = this;
+        
+        //On mouse over button transition functions
+        this.onmouseover = (function() 
+            {
+                that.style.background = "#992222";
+                that.style.marginTop = "3px";
+                that.style.boxShadow = "0 4px 0 #770000";
+            })();
+        this.onmouseout = setTimeout(function()
+            {
+                that.style.background = "#ba4343";
+                that.style.marginTop = "0";
+                that.style.boxShadow = "0 7px 0 #770000";
+            }, 180);
+        
+        // Ensures there is/are (a) task(s) to be deleted by 'disabling' button 
+        if (ID("tasks-container").innerHTML == "")
+            return;
+        
+        var really = swal("Are you sure?", "You will not be able to recover these tasks!", "warning");
+        
+        if (really)
+        {
+            tasksLen = CLASS("js--task-wrapper").length;
+            for (var i=0; i<tasksLen; i++)
+                CLASS("js--task-wrapper")[i].style.WebkitTransition = "opacity 0.85s",
+                CLASS("js--task-wrapper")[i].style.MozTransition = "opacity 0.85s",
+                CLASS("js--task-wrapper")[i].style.MsTransition = "opacity 0.85s",
+                CLASS("js--task-wrapper")[i].style.OTransition = "opacity 0.85s",
+                CLASS("js--task-wrapper")[i].style.opacity = "0";
+            
+            cache = false;
+            if (storageEnabled)
+                for (i in localStorage)
+                    if (!isNaN(Number(i)))
+                    {
+                        cache = true;
+                        break;
+                    } else continue;
+            
+            setTimeout(function()
+            {
+                ID("tasks-container").innerHTML = "";
+                ID("create-delete-container").style.position = "";
+                
+                if (cache == true)
+                    toast("App cache cleared.");
+            }, 800);
+            
+            // Clears app Web storage cache
+            if(storageEnabled)
+                for (i in localStorage)
+                    if (!isNaN(Number(i)))
+                        delete localStorage[i];
+                    else continue;
+        }
+        else
+            return null;
+    }
+    
+    
+    //Adding event listeners on page load
+    addListeners();
+    ID("name").innerHTML = "<b>Brandon</b>";
+        
+        
+        
+    // SeiveInt function to seive out integers and decimals alike
+    function seiveInt(x)
+    {
+        seived = [];
+        for (var i=0, xLen=x.length; i<=xLen; i++)
+            if (isNaN(x[i]) && x[i] != "." && x[i] != ":")
+                continue;
+            else if (x[i] == ":")
+                seived.push(".");
+            else
+                seived.push(x[i]);
+        xInts = seived.join("");
+        return Number(xInts);    
+    }
+    
+    
+    
+    // Edit/Save function
+    function edit()
+    {
+        // Declaring identifiers and "that" variable due to scoping ishes
+        that = this;
+        
+        classParentLI = that.parentNode.parentNode.getElementsByClassName.bind(that.parentNode.parentNode);
+        tagParentLI = that.parentNode.parentNode.getElementsByTagName.bind(that.parentNode.parentNode);
+        classParentUL = that.parentNode.parentNode.parentNode.getElementsByClassName.bind(that.parentNode.parentNode.parentNode);
+        tagParentUL = that.parentNode.parentNode.parentNode.getElementsByTagName.bind(that.parentNode.parentNode.parentNode);
+        
+        // Edit function
+        if (this.innerHTML == "Edit")
+        {
+            // The third child UL-LI element (Progress: ) in the HTML has no child element with class "js--content", that's why the following are done
+            if (classParentLI("js--content")[0] != undefined)
+            {
+                if (tagParentLI("input")[0].type == "number")
+                {
+                    var check = seiveInt(classParentLI("js--content")[0].innerHTML);
+                //    if (tagParentLI("input")[0].value != "")
+                    if (/hour/.test(classParentLI("js--content")[0].innerHTML))
+                        tagParentLI("input")[0].value = ((Math.floor(check)*60) + ((check-Math.floor(check))*100)).toFixed(0);
+                    else
+                        tagParentLI("input")[0].value = check;
+                }
+                else
+                    tagParentLI("input")[0].value = classParentLI("js--content")[0].innerHTML;
+    
+                classParentLI("js--content")[0].style.opacity = "0",
+                setTimeout(function() 
+                {
+                    classParentLI("js--content")[0].style.display = "none";
+                }, 150);
+            }
+            else
+                tagParentLI("input")[0].value = parseInt(classParentUL("js--percent-complete")[0].innerHTML);
+        
+            // Display input function
+            setTimeout(function() 
+            {
+                classParentLI("input")[0].style.display = "table-cell";
+                setTimeout(function() 
+                {
+                    classParentLI("input")[0].style.opacity = "1";
+                }, 50);
+            }, 180);
+            
+            // Mouse over function for "edit" button colour transition 
+            this.onmouseover = (function() 
+                {
+                    that.style.background = "#222";
+                })();
+            this.onmouseout = setTimeout(function()
+                {
+                    that.style.background = that.parentNode.parentNode.parentNode.style.borderTopColor;
+                }, 200);
+        }
+
+        // Done
+        if (this.innerHTML == "Tack")
+        {
+            var check;
+        
+            //Same as illustrated under 'edit()' above
+            if (classParentLI("js--content")[0] != undefined)
+            {
+                if (tagParentLI("input")[0].type == "number")
+                {
+                    check = parseInt(tagParentLI("input")[0].value);
+                    if (check < 60 && check > 0)
+                        classParentLI("js--content")[0].innerHTML = check + " minute(s)";
+                    else if (check > 59)
+                        if (check%60 < 10)
+                            classParentLI("js--content")[0].innerHTML = Math.floor(check/60) + ":0" + (check%60) + " hour(s)";
+                        else
+                            classParentLI("js--content")[0].innerHTML = Math.floor(check/60) + ":" + (check%60) + " hour(s)";
+                }
+                else
+                    classParentLI("js--content")[0].innerHTML = 
+                                    tagParentLI("input")[0].value.trim().slice(0,1).toUpperCase()+tagParentLI("input")[0].value.trim().slice(1, tagParentLI("input")[0].value.length);
+                classParentLI("input")[0].style.opacity = "0";
+                setTimeout(function() 
+                {
+                    classParentLI("input")[0].style.display = "none";
+                }, 150);
+            }
+            else
+            {
+                if (Number(tagParentLI("input")[0].value) > 100 || 
+                                Number(tagParentLI("input")[0].value) < 0)
+                {
+                    alert("Out of range!");
+                    return null;
+                }
+                classParentLI("input")[0].style.opacity = "0";
+                setTimeout(function() 
+                {
+                    classParentLI("input")[0].style.display = "none";
+                }, 150);
+                classParentUL("js--percent-complete")[0].innerHTML = Number(tagParentLI("input")[0].value).toFixed(0) + "%";
+                classParentUL("js--progress-bar")[0].style.width = seiveInt(tagParentLI("input")[0].value) + "%";
+                
+                // Sets progress-bar colour
+                progress = seiveInt(classParentUL("js--progress-bar")[0].style.width);
+                bar = classParentUL("js--progress-bar")[0];
+                if (progress < 10)
+                    bar.style.background = "#ff4444",
+                    bar.style.color = "#9a1515";
+                else if (progress > 9 && progress < 30)
+                    bar.style.background = "#ff7f50",
+                    bar.style.color = "#882b00";
+                else if (progress > 29 && progress < 60)
+                    bar.style.background = "#ffa500",
+                    bar.style.color = "#996100";
+                else if (progress > 59 && progress < 90)
+                    bar.style.background = "#caca00",
+                    bar.style.color = "#777700";
+                else
+                    bar.style.background = "#20bb20",
+                    bar.style.color = "#005b00";
+            }
+            
+            // Displays task content
+            setTimeout(function() 
+            {
+                if (classParentLI("js--content")[0] != undefined)
+                    classParentLI("js--content")[0].style.display = "table-cell";
+                setTimeout(function() 
+                {
+                    if (classParentLI("js--content")[0] != undefined)
+                        classParentLI("js--content")[0].style.opacity = "1";
+                }, 50);
+            }, 180)
+            
+            //On mouse over button color transition function
+            this.onmouseover = (function() 
+                {
+                    that.style.background = "#222";
+                })();
+            this.onmouseout = setTimeout(function()
+                {
+                    that.style.background = that.parentNode.parentNode.parentNode.style.borderTopColor;
+                    that.innerHTML = "Edit";
+                }, 200);
+        }
+    }
+    
+
+    
+    // This function enables 'saving' on user input
+    function swap()
+    {        
+        this.parentNode.parentNode.parentNode.getElementsByClassName("edit")[0].innerHTML = "Tack";
+    }
+
+
+
+    function save()
+    {
+        that = this;
+        
+        classParentUL = that.parentNode.parentNode.parentNode.getElementsByClassName.bind(that.parentNode.parentNode.parentNode);
+        tagParentUL = that.parentNode.parentNode.parentNode.getElementsByTagName.bind(that.parentNode.parentNode.parentNode);
+        
+        // On mouse over color transition 
+        this.onmouseover = (function() 
+            {
+                that.style.background = "#0129a1";
+            })();
+        this.onmouseout = setTimeout(function()
+            {
+                that.style.background = "#4169e1";
+            }, 200);
+            
+        taskName = classParentUL("js--task-name")[0].innerHTML;
+        taskIndex = classParentUL("js--description")[0].innerHTML;
+        task = '<ul id="task-wrapper" class="task-wrapper fadeUp js--task-wrapper">' + String(that.parentNode.parentNode.parentNode.innerHTML) + "</ul>";
+        
+        // Ensures user inputs task name
+        if (taskName == "" && tagParentUL("input")[0].value.trim() == "")
+        {
+            alert("Name your task.");
+            return null;
+        }
+        else if (taskName == "" && tagParentUL("input")[0].value.trim() != "")
+        {
+            alert("Tack your task name to enable saving.");
+            return null;
+        }
+        
+        // Checks to ensure user made any change
+        check = [];
+        for (i=0; i<3; i++)
+            if (classParentUL("input")[i].style.display == "table-cell" && classParentUL("js--edit-content")[i].innerHTML == "Edit")
+                check.push(true);
+            else
+                check.push(false);
+        if (check.every(function(a) { return a == true}))
+        {
+            toast("No changes have been made.");
+            return;
+        }
+        
+        //Checks to ensure user tacks value before saving
+        for (i=0; i<3; i++)
+            if (classParentUL("input")[i].style.display == "table-cell")
+            {
+                toast("Tack individual input values before saving task.");
+                return;
+            }
+            
+        taskExists = new RegExp(taskIndex);
+        
+        // Loop to check if task already exists in storage and replaces
+        if (storageEnabled)
+            for (i in localStorage)
+            {
+                if (taskExists.test(localStorage.getItem(i)))
+                {
+                    localStorage.setItem(i, String(task));
+                    
+                    if (localStorage[i] != undefined)
+                        toast("Changes have been saved.");
+                    return;
+                }
+            }
+        
+        // Convert number to string as localStorage supports only strings
+        stringedTaskIndex = String(seiveInt(taskIndex));
+        
+        // Ultimately saves task
+        if (storageEnabled)
+        {
+            localStorage.setItem(stringedTaskIndex, String(task));
+            if (localStorage.getItem(stringedTaskIndex) != undefined)
+                toast("Task saved successfully.");
+        }
+        else
+            toast("Unable to save task. <br />Enable cookies in browser.");
+    }
+    
+    
+    
+    // The toast function
+    function toast(text)
+    {
+        ID("toast-wrapper").style.display = "initial";
+        ID("toast").innerHTML = text;
+        setTimeout(function()
+        {
+            ID("toast-wrapper").style.opacity = "1";
+            setTimeout(function() 
+            {
+                ID("toast-wrapper").style.WebkitTransition = "opacity 1.2s ease-in";
+                ID("toast-wrapper").style.MozTransition = "opacity 1.2s ease-in";
+                ID("toast-wrapper").style.MsTransition = "opacity 1.2s ease-in";
+                ID("toast-wrapper").style.OTransition = "opacity 1.2s ease-in";
+                ID("toast-wrapper").style.opacity = "0";
+                setTimeout(function()
+                {
+                    ID("toast-wrapper").style.display = "none";
+                }, 1300);
+            }, 3000);
+        }, 900);
+    }
+    
+    
+    // The delete function (Neglect the variable name. There is a 'delete' keyword in JS
+    function deleete()
+    {
+        var that = this;
+        
+        this.onmouseover = (function() 
+            {
+                that.style.background = "#880000";
+            })();
+        this.onmouseout = setTimeout(function()
+            {
+                that.style.background = "#dd5555";
+            }, 200);
+        
+        if (this.parentNode.parentNode.parentNode.getElementsByClassName("js--task-name")[0].innerHTML != "")
+        {
+            really = confirm("Are you sure you want to delete this task \""+this.parentNode.parentNode.parentNode.getElementsByClassName("js--task-name")[0].innerHTML+"\"?");
+        
+            if (really)
+            {
+                okay();
+                if (storageEnabled)
+                    delete localStorage[String(Number(that.parentNode.parentNode.parentNode.getElementsByClassName("js--task-index")[0].innerHTML))];
+            }
+            else 
+                return null;
+        }
+        else okay();
+        
+        // Fade-out delete function
+        function okay()
+        {
+            that.parentNode.parentNode.parentNode.style.WebkitTransition = "opacity 0.85s";
+            that.parentNode.parentNode.parentNode.style.MozTransition = "opacity 0.85s";
+            that.parentNode.parentNode.parentNode.style.MsTransition = "opacity 0.85s";
+            that.parentNode.parentNode.parentNode.style.OTransition = "opacity 0.85s";
+            that.parentNode.parentNode.parentNode.style.opacity = "0";
+            setTimeout(function()
+            {
+                that.parentNode.parentNode.parentNode.parentNode.removeChild(that.parentNode.parentNode.parentNode);
+                if (CLASS("js--task-wrapper")[0] == null)
+                    ID("tasks-container").innerHTML = "";
+                if (CLASS("js--task-wrapper")[1] == null)
+                    ID("create-delete-container").style.position = "";
+            }, 800);
+        }
+    }
+    
+    
+    
+    // Fixes buttons at top of screen on scroll of screen
+    ID("content-wrapper").onscroll = function()
+    {
+        page = ID("content-wrapper");
+        scrollY = page.scrollY || page.scrollTop || page.pageYOffset;
+    
+        if (scrollY > 160)
+            ID("create-delete-container").style.position = "fixed",
+            ID("create-delete-container").className = "slideDown";
+        else if (scrollY < 125)
+            ID("create-delete-container").className = "",
+            ID("create-delete-container").style.position = "";
+    }
+    
+    
+    // Load saved tasks function
+    function loadHistory()
+    {    
+        taskArr = [];
+        storeLen = localStorage.length;
+        
+        if (storageEnabled)
+            for (i in localStorage)
+            {
+                if (!isNaN(Number(i)))
+                {
+                    if (localStorage.getItem(i) != undefined && /task-wrapper/.test(localStorage.getItem(i)))
+                        taskArr[Number(i)] = localStorage.getItem(i);
+                }
+                else continue;
+            }
+            
+        for (i=0; i<taskArr.length; i++)
+            if (taskArr[i] != undefined)
+                ID("tasks-container").insertAdjacentHTML("afterbegin", taskArr[i]);
+            else continue;
+        
+        if (CLASS("js--task-wrapper")[0] != undefined)
+            borderColorIndex = Number(CLASS("js--task-index")[0].innerHTML)+1;
+        
+        if (ID("tasks-container").innerHTML == "")
+            return;
+        else
+        {
+            toast("Saved task(s) loaded successfully."),
+            addListeners();
+            
+            tasksLen = CLASS("js--task-wrapper").length;
+            for (i=0; i<tasksLen; i++)
+                CLASS("js--task-wrapper")[i].style.borderTopColor = CLASS("js--task-wrapper")[i].getElementsByClassName("js--edit-content")[0].style.backgroundColor,
+                CLASS("js--save")[i].style.background = "#4169e1",
+                CLASS("js--delete")[i].style.background = "#aa3333";
+            
+            setTimeout(function()
+            {
+                for (i=0; i<tasksLen; i++)
+                    CLASS("js--task-wrapper")[i].className = CLASS("js--task-wrapper")[i].className.replace("fadeUp", "");
+            }, 700)
+        }
+    }
+    
+    // Calling load history function on page load
+    loadHistory();
+    
+    (function() {
+        checking = false;
+        if (storageEnabled)
+            for(i in localStorage)
+                if (!isNaN(Number(i)))
+                    checking = true;
+                else continue;
+                
+        if (checking == true)
+            setTimeout(function()
+            {
+                toast("Welcome back. ;)");
+            }, 5300);
+        else
+            alert("Hi, there. Good day and welcome. \n\
+Thanks for checking this app out. 😊\n\n\
+This is an 'e-To-do List'. \nThe word inflected from the word, 'to-do list', means \"A list of errands and other tasks – often written on a piece of paper as a memory aid – that one needs or intends to accomplish.\" (English Dictionary)\n\
+I hope you find it useful in aiding you to accomplish/complete your daily tasks.\n\n\
+Create/Add tasks and save them. You need not worry about what would happen to your outlined tasks when you close the browser because this app was designed in a way that it saves your tasks in your browser and you will always get to see them whenever you lunch it, even though it's offline. 😉 \n\
+And you can also track your own progress with a particular task by setting the progress bar for the task. \n\n\
+So, set tasks daily for yourself and seek to accomplish them, and I believe it'll better you.\n\n\
+PS: This app works in sync with your browser's storage and thus won't or may not function appropriately without \"cookies\" enabled in your browser. So ensure cookies are enabled to enable task saving.\n\n\
+Thanks, once again. \n\n- Godspower ✌");
+    })();
+}
+
+
+
+
+/*
+https://code.sololearn.com/WhTE2vE6IVva/?ref=app
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </script>
+    </body>
+</html>
